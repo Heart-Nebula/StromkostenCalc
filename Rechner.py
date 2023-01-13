@@ -3,6 +3,7 @@ from tkinter import *
 root = Tk()
 root.title("Lustiger Titel")
 root.geometry("600x600")
+root.resizable(width=False, height=False)
 
 label_watt = Label(root, text="Verbrauch in Watt")
 label_watt.grid()
