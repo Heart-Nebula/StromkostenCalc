@@ -1,50 +1,82 @@
-import pip
-
-pip.main(["install", "ttkbootstrap"])
-import ttkbootstrap as ttk
-from ttkbootstrap.constants import *
+from tkinter import *
+from tkinter import ttk
 
 # root window
-root = ttk.Window(themename="superhero")
+root = Tk()
 root.title("Stromrechner v1")
 root.geometry("1280x720")
 root.resizable(width=False, height=False)
+root.tk.call("source", "azure.tcl")
+root.tk.call("set_theme", "dark")
+root.attributes("-fullscreen", True)
 
 # main parent frame
 mainFrame = ttk.Frame(root)
 mainFrame.grid(padx=(10, 0), pady=(10, 0))
 
+
+class classicLabel:
+
+    var_font = "Yu Gothic UI"
+    var_font_size = 10
+
+    def __init__(self, parent, name, text=""):
+        self.parent = parent
+        self.name = name
+        self.text = text
+
+        self.label = ttk.Label(parent, text=text, font=(self.var_font, self.var_font_size))
+
+    def grid(self, **kwargs):
+        self.label.grid(kwargs)
+
+
+class classicEntry:
+
+    var_font = "Yu Gothic UI"
+    var_font_size = 10
+
+    def __init__(self, parent, name):
+        self.parent = parent
+        self.name = name
+
+        self.entry = ttk.Entry(parent, font=(self.var_font, self.var_font_size))
+
+    def grid(self, **kwargs):
+        self.entry.grid(kwargs)
+
+
 # EINGABEN ------------------------------------------------------------------
 # eingabe wattverbrauch
-label_watt = ttk.Label(mainFrame, text="Verbrauch in Watt:")
-label_watt.grid(column=0, row=0, sticky=NW)
+label_watt = classicLabel(mainFrame, name="label_watt", text="Verbrauch in Watt:")
+label_watt.grid(column=0, row=0, sticky=NSEW)
 
-entry_watt = ttk.Entry(mainFrame)
-entry_watt.grid(column=1, row=0, sticky=NW, padx=(5, 0))
+entry_watt = classicEntry(mainFrame, name="entry_watt")
+entry_watt.grid(column=1, row=0, sticky=NSEW, padx=(5, 0))
 
 # eingabe betriebsstunden
 label_betriebsstunden = ttk.Label(mainFrame, text="Betriebsstunden / Tag:")
-label_betriebsstunden.grid(column=2, row=0, sticky=NW, padx=(20, 0))
+label_betriebsstunden.grid(column=2, row=0, sticky=NSEW, padx=(20, 0))
 
 entry_betriebsstunden = ttk.Entry(mainFrame)
-entry_betriebsstunden.grid(column=3, row=0, sticky=NW, padx=(5, 0))
+entry_betriebsstunden.grid(column=3, row=0, sticky=NSEW, padx=(5, 0))
 
 # eingabe betriebstage pro woche
 label_betriebstage_week = ttk.Label(mainFrame, text="Betriebstage / Woche:")
-label_betriebstage_week.grid(column=4, row=0, sticky=NW, padx=(20, 0))
+label_betriebstage_week.grid(column=4, row=0, sticky=NSEW, padx=(20, 0))
 
 days = [1, 2, 3, 4, 5, 6, 7]
 
 combobox_betriebstage_week_2 = ttk.Combobox(mainFrame, values=days, state="readonly")
 combobox_betriebstage_week_2.current(0)
-combobox_betriebstage_week_2.grid(column=5, row=0, sticky=NW, padx=(5, 0))
+combobox_betriebstage_week_2.grid(column=5, row=0, sticky=NSEW, padx=(5, 0))
 
 # eingabe strompreis
 label_strompreis = ttk.Label(mainFrame, text="Strompreis pro kWh:")
-label_strompreis.grid(column=6, row=0, sticky=NW, padx=(20, 0))
+label_strompreis.grid(column=6, row=0, sticky=NSEW, padx=(20, 0))
 
 entry_strompreis = ttk.Entry(mainFrame)
-entry_strompreis.grid(column=7, row=0, sticky=NW, padx=(5, 0))
+entry_strompreis.grid(column=7, row=0, sticky=NSEW, padx=(5, 0))
 
 # ANZEIGEN ------------------------------------------------------------------
 # anzeige kwh pro tag
