@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter import ttk
-from tkinter import tix
 
 items = []
 # root window
@@ -20,44 +19,69 @@ mainFrame.grid(padx=(10, 0), pady=(10, 0))
 # EINGABEN ------------------------------------------------------------------
 # eingabe wattverbrauch
 l_watt = ttk.Label(mainFrame, name="l_watt", text="Verbrauch in Watt:")
-l_watt.grid(column=0, row=0, sticky=NSEW)
+l_watt.grid(column=0, row=0, sticky=W)
 
 e_watt = ttk.Entry(mainFrame, name="e_watt", width=10)
-e_watt.grid(column=1, row=0, sticky=NSEW, padx=(5, 0))
+e_watt.grid(column=1, row=0, sticky=W)
 
 # eingabe betriebsstunden
 l_daily_usage = ttk.Label(mainFrame, text="Betriebsstunden / Tag:")
-l_daily_usage.grid(column=2, row=0, sticky=NSEW, padx=(20, 0))
+l_daily_usage.grid(column=2, row=0, sticky=W, padx=(20, 0))
 
-e_hours_day = ttk.Entry(mainFrame, width=10)
-e_hours_day.grid(column=3, row=0, sticky=NSEW, padx=(5, 0))
+# e_hours_day = ttk.Entry(mainFrame, width=10)
+# e_hours_day.grid(column=3, row=0, sticky=NSEW, padx=(5, 0))
+hours = list(range(1, 25))
+
+com_hours_per_day = ttk.Combobox(mainFrame, values=hours, state="readonly", width=3)
+com_hours_per_day.current(0)
+com_hours_per_day.grid(column=3, row=0, sticky=W, padx=(5, 0))
 
 # eingabe betriebstage pro woche
 l_days_per_week = ttk.Label(mainFrame, text="Betriebstage / Woche:")
-l_days_per_week.grid(column=4, row=0, sticky=NSEW, padx=(20, 0))
+l_days_per_week.grid(column=4, row=0, sticky=W, padx=(20, 0))
 
-days = [1, 2, 3, 4, 5, 6, 7]
+days = list(range(1, 8))
 
 com_days_per_week = ttk.Combobox(mainFrame, values=days, state="readonly", width=3)
 com_days_per_week.current(0)
-com_days_per_week.grid(column=5, row=0, sticky=NSEW, padx=(5, 0))
+com_days_per_week.grid(column=5, row=0, sticky=W, padx=(5, 0))
 
 # eingabe strompreis
 l_power_cost = ttk.Label(mainFrame, text="Strompreis pro kWh:")
-l_power_cost.grid(column=6, row=0, sticky=NSEW, padx=(20, 0))
+l_power_cost.grid(column=6, row=0, sticky=W, padx=(20, 0))
 
 e_cost = ttk.Entry(mainFrame, width=10)
-e_cost.grid(column=7, row=0, sticky=NSEW, padx=(5, 0))
+e_cost.grid(column=7, row=0, sticky=W, padx=(5, 0))
 
 # ANZEIGEN ------------------------------------------------------------------
 # anzeige kwh pro tag
-s_items = Scrollbar(mainFrame)
-s_items.grid(column=1, row=1, sticky=[N, S, W], pady=(15, 0))
+s_items = ttk.Scrollbar(mainFrame)
+s_items.grid(column=4, row=1, sticky=["N", "S", "W"], pady=(15, 0))
 
-lb_items = Listbox(mainFrame, yscrollcommand=s_items.set)
-lb_items.grid(column=0, row=1, sticky=W, pady=(15, 0))
 
-s_items.configure(command=lb_items.yview)
+tv_items = ttk.Treeview(
+    mainFrame,
+    columns=["1", "2", "3", "4", "5"],
+    selectmode=BROWSE,
+    yscrollcommand=s_items.set,
+    show="headings",
+)
+tv_items.column("1", anchor=CENTER, stretch=False, width=100)
+tv_items.column("2", anchor=CENTER, stretch=False, width=100)
+tv_items.column("3", anchor=CENTER, stretch=False, width=100)
+tv_items.column("4", anchor=CENTER, stretch=False, width=100)
+tv_items.column("5", anchor=CENTER, width=80)
+tv_items.heading("1", text="Name", anchor=CENTER)
+tv_items.heading("2", text="Watt usage", anchor=CENTER)
+tv_items.heading("3", text="Hours / day", anchor=CENTER)
+tv_items.heading("4", text="Days / week", anchor=CENTER)
+tv_items.heading("5", text="Power cost", anchor=CENTER)
+tv_items.grid(column=0, row=1, columnspan=4, pady=(15, 0), sticky=W)
+
+s_items.configure(command=tv_items.yview)
+
+tv_items.insert("", index="end", text="lol", values=("pog", "pog", "pog", "pog", "pog"))
+
 l_kwh_day = ttk.Label(mainFrame, text="Verbrauch pro Tag:")
 l_kwh_day.grid(column=0, row=2, sticky=W, pady=(10, 0))
 
@@ -111,12 +135,12 @@ l_cost_year_2.grid(column=1, row=9, sticky=W, padx=(4, 0))
 def calculate():
     cost = float(e_cost.get().replace(",", "."))
     watt = int(e_watt.get())
-    if not int(e_hours_day.get()) > 24:
-        hours_day = int(e_hours_day.get())
+    if not int(com_hours_per_day.get()) > 24:
+        hours_day = int(com_hours_per_day.get())
     days_per_week = int(com_days_per_week.get())
 
-    lb_items.insert(99999999, cost)
-    lb_items.grid(column=0, row=1, sticky=W, pady=(15, 0))
+    # tv_items.insert(99999999, cost)
+    # tv_items.grid(column=0, row=1, sticky=W, pady=(15, 0))
 
 
 # knopf ausrechnen
