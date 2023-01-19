@@ -9,7 +9,6 @@ root.geometry("1000x600")
 root.resizable(width=False, height=False)
 root.tk.call("source", "azure.tcl")
 root.tk.call("set_theme", "dark")
-# root.attributes("-fullscreen", True)
 
 # main parent frame
 mainFrame = ttk.Frame(root)
