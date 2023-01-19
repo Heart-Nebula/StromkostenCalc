@@ -177,8 +177,8 @@ def calculate():
 
         daily_usage += consumption * device_hours / 1000
         weekly_usage += consumption * device_hours * device_days / 1000
-        monthly_usage += consumption * device_hours * device_days * 4.3 / 1000
-        yearly_usage += consumption * device_hours * device_days * 52.1 / 1000
+        monthly_usage += consumption * device_hours * device_days * 4.34524 / 1000
+        yearly_usage += consumption * device_hours * device_days * 52.14285714 / 1000
 
         daily_cost = daily_usage * float(electricity_cost)
         weekly_cost = weekly_usage * float(electricity_cost)
