@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import ttk
 
-items = []
 # root window
 root = Tk()
 root.title("Stromrechner v1")
