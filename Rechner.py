@@ -64,12 +64,19 @@ def add_device():
         hours_day = int(com_hours_per_day.get())
     days_per_week = int(com_days_per_week.get())
 
-    tv_items.insert("", "end", values=(name, watt, hours_day, days_per_week, cost))
+    for i in range(int(e_number_of_devices.get())):
+        tv_items.insert("", "end", values=(name, watt, hours_day, days_per_week, cost))
 
+l_number_of_devices = ttk.Label(mainFrame, text="Anzahl:")
+l_number_of_devices.grid(column=6,columnspan=2, row=1, sticky=NW, pady=(20,0), padx=(20,0))
+
+e_number_of_devices = ttk.Entry(mainFrame, width=5)
+e_number_of_devices.grid(column=7, row=1, sticky=NW, pady=(15,0), padx=(27,0))
+e_number_of_devices.insert(0, "1")
 
 # knop zum hinzufügen eines gerätes zur treeview
-b_add_device = ttk.Button(mainFrame, text="Gerät hinzufügen", command=add_device)
-b_add_device.grid(row=1, column=7, columnspan=2, sticky=NE, pady=(10, 0))
+b_add_device = ttk.Button(mainFrame, text="Gerät(e) hinzufügen", command=add_device)
+b_add_device.grid(row=1, column=7, columnspan=2, sticky=NE, pady=(15, 0))
 
 # ANZEIGEN ------------------------------------------------------------------
 # scrollbar für die treeview mit den geräten
@@ -217,5 +224,12 @@ def delete():
 # löschen knopf
 button_remove = ttk.Button(mainFrame, text="Löschen", command=delete)
 button_remove.grid(column=5, row=1, sticky=NW, pady=(15, 0))
+
+def reset():
+    tv_items.delete(*tv_items.get_children())
+
+
+button_reset = ttk.Button(mainFrame, text="Zurücksetzen", command=reset)
+button_reset.grid(column=5, row=1, sticky=NW, pady=(55, 0))
 
 root.mainloop()
