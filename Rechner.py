@@ -65,7 +65,7 @@ def add_device():
     days_per_week = int(com_days_per_week.get())
 
     for i in range(int(e_number_of_devices.get())):
-        tv_items.insert("", "end", values=(name, watt, hours_day, days_per_week, cost))
+        tv_items.insert("", "end", values=(name + f" ({i+1})", watt, hours_day, days_per_week, cost))
 
 l_number_of_devices = ttk.Label(mainFrame, text="Anzahl:")
 l_number_of_devices.grid(column=6,columnspan=2, row=1, sticky=NW, pady=(20,0), padx=(20,0))
