@@ -109,28 +109,28 @@ s_items.configure(command=tv_items.yview)
 l_kwh_day = ttk.Label(mainFrame, text="Verbrauch pro Tag:")
 l_kwh_day.grid(column=0, row=2, sticky=W, pady=(10, 0))
 
-l_kwh_day_2 = ttk.Label(mainFrame, text="")
+l_kwh_day_2 = ttk.Label(mainFrame, text="0 kWh")
 l_kwh_day_2.grid(column=1, row=2, sticky=W, padx=(4, 0), pady=(10, 0))
 
 # anzeige kwh pro woche
 l_kwh_week = ttk.Label(mainFrame, text="Verbrauch pro Woche:")
 l_kwh_week.grid(column=0, row=3, sticky=W)
 
-l_kwh_week_2 = ttk.Label(mainFrame, text="")
+l_kwh_week_2 = ttk.Label(mainFrame, text="0 kWh")
 l_kwh_week_2.grid(column=1, row=3, sticky=W, padx=(4, 0))
 
 # anzeige kwh pro monat
 l_kwh_month = ttk.Label(mainFrame, text="Verbrauch pro Monat:")
 l_kwh_month.grid(column=0, row=4, sticky=W)
 
-l_kwh_month_2 = ttk.Label(mainFrame, text="")
+l_kwh_month_2 = ttk.Label(mainFrame, text="0 kWh")
 l_kwh_month_2.grid(column=1, row=4, sticky=W, padx=(4, 0))
 
 # anzeige kwh pro jahr
 l_kwh_year = ttk.Label(mainFrame, text="Verbrauch pro Jahr:")
 l_kwh_year.grid(column=0, row=5, sticky=W)
 
-l_kwh_year_2 = ttk.Label(mainFrame, text="")
+l_kwh_year_2 = ttk.Label(mainFrame, text="0 kWh")
 l_kwh_year_2.grid(column=1, row=5, sticky=W, padx=(4, 0))
 
 # KOSTEN ------------------------------------------------------------------
@@ -138,28 +138,28 @@ l_kwh_year_2.grid(column=1, row=5, sticky=W, padx=(4, 0))
 l_cost_day = ttk.Label(mainFrame, text="Kosten pro Tag:")
 l_cost_day.grid(column=0, row=6, sticky=W, pady=(10, 0))
 
-l_cost_day_2 = ttk.Label(mainFrame, text="")
+l_cost_day_2 = ttk.Label(mainFrame, text="0 €")
 l_cost_day_2.grid(column=1, row=6, sticky=NSEW, padx=(4, 0), pady=(10, 0))
 
 # anzeige kosten pro woche
 l_cost_week = ttk.Label(mainFrame, text="Kosten pro Woche:")
 l_cost_week.grid(column=0, row=7, sticky=W)
 
-l_cost_week_2 = ttk.Label(mainFrame, text="")
+l_cost_week_2 = ttk.Label(mainFrame, text="0 €")
 l_cost_week_2.grid(column=1, row=7, sticky=W, padx=(4, 0))
 
 # anzeige kosten pro monat
 l_cost_month = ttk.Label(mainFrame, text="Kosten pro Monat:")
 l_cost_month.grid(column=0, row=8, sticky=W)
 
-l_cost_month_2 = ttk.Label(mainFrame, text="")
+l_cost_month_2 = ttk.Label(mainFrame, text="0 €")
 l_cost_month_2.grid(column=1, row=8, sticky=W, padx=(4, 0))
 
 # anzeige kosten pro jahr
 l_cost_year = ttk.Label(mainFrame, text="Kosten pro Jahr:")
 l_cost_year.grid(column=0, row=9, sticky=W)
 
-l_cost_year_2 = ttk.Label(mainFrame, text="")
+l_cost_year_2 = ttk.Label(mainFrame, text="0 €")
 l_cost_year_2.grid(column=1, row=9, sticky=W, padx=(4, 0))
 
 # KNÖPFE
@@ -192,15 +192,15 @@ def calculate():
         monthly_cost = monthly_usage * float(electricity_cost)
         yearly_cost = yearly_usage * float(electricity_cost)
 
-    l_kwh_day_2.configure(text=str(round(daily_usage, 2)))
-    l_kwh_week_2.configure(text=str(round(weekly_usage, 2)))
-    l_kwh_month_2.configure(text=str(round(monthly_usage, 2)))
-    l_kwh_year_2.configure(text=str(round(yearly_usage, 2)))
+    l_kwh_day_2.configure(text=str(round(daily_usage, 2))+" kWh")
+    l_kwh_week_2.configure(text=str(round(weekly_usage, 2))+" kWh")
+    l_kwh_month_2.configure(text=str(round(monthly_usage, 2))+" kWh")
+    l_kwh_year_2.configure(text=str(round(yearly_usage, 2))+" kWh")
 
-    l_cost_day_2.configure(text=str(daily_cost))
-    l_cost_week_2.configure(text=str(weekly_cost))
-    l_cost_month_2.configure(text=str(monthly_cost))
-    l_cost_year_2.configure(text=str(yearly_cost))
+    l_cost_day_2.configure(text=str(round(daily_cost, 2))+" €")
+    l_cost_week_2.configure(text=str(round(weekly_cost, 2))+" €")
+    l_cost_month_2.configure(text=str(round(monthly_cost, 2))+" €")
+    l_cost_year_2.configure(text=str(round(yearly_cost, 2))+" €")
 
 
 # berechnen knopf
